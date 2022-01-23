@@ -24,7 +24,7 @@ class Player(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.position, self.velocity = pygame.math.Vector2(320-64,320-64), pygame.math.Vector2(0,0)
         self.acceleration = pygame.math.Vector2(0,0)
-        self.speed = 0.6
+        self.speed = 0.45
         self.animatable = True
         self.plantCount = 0
         self.interactable = False
