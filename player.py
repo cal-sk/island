@@ -11,12 +11,15 @@ class Player(pygame.sprite.Sprite):
         self.is_jumping, self.on_ground = False, False
         self.gravity, self.friction = .35, -.12
         self.animating = False
+        # sprites list
         self.sprites = []
         self.sprites.append(pygame.transform.scale(pygame.image.load("assets/player.png"), (32, 32)))
         self.sprites.append(pygame.transform.scale(pygame.image.load("assets/player2.png"), (32, 32)))
         self.sprites.append(pygame.transform.scale(pygame.image.load("assets/player3.png"), (32, 32)))
         self.sprites.append(pygame.transform.scale(pygame.image.load("assets/player4.png"), (32, 32)))
+        # current image for animation
         self.current_image = 0
+        # so it changes image
         self.image = self.sprites[self.current_image]
         self.rect = self.image.get_rect()
         self.position, self.velocity = pygame.math.Vector2(320-64,320-64), pygame.math.Vector2(0,0)
@@ -26,27 +29,27 @@ class Player(pygame.sprite.Sprite):
         self.plantCount = 0
         self.interactable = False
         self.interType = None
-
+    # add to the amount of plants
     def plantInteract(self):
         self.plantCount += 1
 
     def draw(self, display):
         display.blit(self.image, (self.rect.x, self.rect.y))
  
-
+    # animation
     def anim_run(self):
         if self.animatable:
             self.animating = True
-            self.current_image += 0.3
+            self.current_image += 0.3 # this sets the speed of animation
             if self.current_image >= len(self.sprites):
                 self.current_image = 1
             self.image = self.sprites[int(self.current_image)]
-
+    # stop animation
     def anim_stop(self):
         self.animating = False
     # ADD INTERACT ANIMATION AND PLANT COLLECTION COUNTER 
     # AND MAKE PLANTS RUN OUT OF STUFF
-
+    # update function
     def update(self, dt, tiles, objs):
         self.horizontal_movement(dt)
         self.checkCollisionsx(tiles, objs)
@@ -56,7 +59,7 @@ class Player(pygame.sprite.Sprite):
         if self.current_image != 0 and not self.animating:
                 self.current_image = 0
         self.image = self.sprites[int(self.current_image)] 
-
+    # check interaction function
     def checkInteraction(self, tiles, objs):
         objs = self.get_hits(tiles, objs)
         for obj in objs:
@@ -85,11 +88,14 @@ class Player(pygame.sprite.Sprite):
         self.acceleration.x = 0
         if self.LEFT_KEY:
             self.acceleration.x -= self.speed
+            # animation
             self.anim_run()
         elif self.RIGHT_KEY:
             self.acceleration.x += self.speed
+            # animation
             self.anim_run()
         elif not self.UP_KEY and not self.DOWN_KEY:
+            # stop animation if no horizontal movement or vertical movement
             self.anim_stop()        
         self.acceleration.x += self.velocity.x * self.friction
         self.velocity.x += self.acceleration.x * dt
@@ -101,12 +107,16 @@ class Player(pygame.sprite.Sprite):
         self.acceleration.y = 0
         if self.UP_KEY:
             self.acceleration.y -= self.speed
+            # animation
             self.anim_run()
         elif self.DOWN_KEY:
             self.acceleration.y += self.speed
+            # animation
             self.anim_run()
         elif not self.LEFT_KEY and not self.RIGHT_KEY:
+            # stop animation if not vertical or horizontal movement
             self.anim_stop()
+        # accel and velocity math
         self.acceleration.y += self.velocity.y * self.friction
         self.velocity.y += self.acceleration.y * dt
         self.limit_velocity(4)

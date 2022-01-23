@@ -2,7 +2,8 @@ import pygame, csv, os
 
 class Tile(pygame.sprite.Sprite):
     def __init__(self, image, x, y, collidable):
-        pygame.sprite.Sprite.__init__(self) 
+        pygame.sprite.Sprite.__init__(self)
+        # may need to add more images if i want animated tiles; or make a new class for them
         self.image = pygame.image.load(image)
         self.image = pygame.transform.scale(self.image, (64, 64))
         self.rect = self.image.get_rect()
@@ -23,10 +24,11 @@ class Tilemap():
 
     def draw_map(self, surface):
         surface.blit(self.map_surface, (0,0))
-
+    # load map function
     def load_map(self):
         for tile in self.tiles:
             tile.draw(self.map_surface)
+            # may have to change if i want animating tiles
     
     def read_csv(self, filename):
         map = []
@@ -35,7 +37,7 @@ class Tilemap():
             for row in data:
                 map.append(list(row))
         return map
-    
+    # load tiles function
     def load_tiles(self, filename):
         tiles = []
         map = self.read_csv(filename)
