@@ -1,3 +1,4 @@
+from json import load
 import pygame, csv, os, time
 
 
@@ -29,8 +30,6 @@ class PlantObject(pygame.sprite.Sprite):
         if self.stock == 3:
             self.current_image = self.image1
         if self.stock == 2:
-            # this works but the image does not change
-            print(self.current_image) 
             self.current_image = self.image2
         if self.stock == 1:
             self.current_image = self.image3
@@ -62,8 +61,10 @@ class ObjectMap():
     def update(self):
         for obj in self.objs:
             obj.update()
+        self.load_map()
     # load map
     def load_map(self):
+        self.map_surface.fill((0,0,0,0))
         for obj in self.objs:
             obj.draw(self.map_surface)
     # read csv
