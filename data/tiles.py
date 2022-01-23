@@ -47,11 +47,11 @@ class Tilemap():
             for tile in row:
                 # add tiles when necessary
                 if tile == '0':
-                    tiles.append(Tile('assets/ground.png', x * self.tile_size, y * self.tile_size, False))
+                    tiles.append(Tile('data/assets/ground.png', x * self.tile_size, y * self.tile_size, False))
                 elif tile == '1':
-                    tiles.append(Tile('assets/water.png', x * self.tile_size, y * self.tile_size, True))
+                    tiles.append(Tile('data/assets/water.png', x * self.tile_size, y * self.tile_size, True))
                 elif tile == '2':
-                    tiles.append(Tile('assets/water2.png', x * self.tile_size, y * self.tile_size, True))
+                    tiles.append(Tile('data/assets/water2.png', x * self.tile_size, y * self.tile_size, True))
                 x += 1
             y += 1
         

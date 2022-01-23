@@ -2,10 +2,10 @@ from genericpath import getmtime
 import pygame
 from pygame.constants import KEYDOWN, KEYUP, K_e
 
-from tiles import *
-from player import Player
-from check_input import *
-from objects import *
+from data.tiles import *
+from data.player import Player
+from data.check_input import *
+from data.objects import *
 
 pygame.init()
 clock = pygame.time.Clock()
@@ -17,8 +17,8 @@ pygame.display.set_caption("Evolution")
 screen = pygame.display.set_mode(WIN_SIZE, 0, 32)
 player = Player()
 
-map = Tilemap('assets/map.csv')
-objMap = ObjectMap('assets/objMap.csv')
+map = Tilemap('data/assets/map.csv')
+objMap = ObjectMap('data/assets/objMap.csv')
 running = True
 gameFont = pygame.font.SysFont("Andale Mono", 20)
 

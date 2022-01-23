@@ -1,7 +1,7 @@
 from os import truncate
 import pygame
-from tiles import *
-from objects import *
+from data.tiles import *
+from data.objects import *
 
 class Player(pygame.sprite.Sprite):
     def __init__(self):
@@ -13,10 +13,10 @@ class Player(pygame.sprite.Sprite):
         self.animating = False
         # sprites list
         self.sprites = []
-        self.sprites.append(pygame.transform.scale(pygame.image.load("assets/player.png"), (32, 32)))
-        self.sprites.append(pygame.transform.scale(pygame.image.load("assets/player2.png"), (32, 32)))
-        self.sprites.append(pygame.transform.scale(pygame.image.load("assets/player3.png"), (32, 32)))
-        self.sprites.append(pygame.transform.scale(pygame.image.load("assets/player4.png"), (32, 32)))
+        self.sprites.append(pygame.transform.scale(pygame.image.load("data/assets/player.png"), (32, 32)))
+        self.sprites.append(pygame.transform.scale(pygame.image.load("data/assets/player2.png"), (32, 32)))
+        self.sprites.append(pygame.transform.scale(pygame.image.load("data/assets/player3.png"), (32, 32)))
+        self.sprites.append(pygame.transform.scale(pygame.image.load("data/assets/player4.png"), (32, 32)))
         # current image for animation
         self.current_image = 0
         # so it changes image
@@ -78,9 +78,6 @@ class Player(pygame.sprite.Sprite):
                         if obj.stock > 0:
                             obj.interact()
                             self.plantInteract()
-                        else:
-                            print("Out of stock")
-                        print(obj.stock)
                         self.E_KEY = False
                         self.interactable = False
     # horizontal movement with accel

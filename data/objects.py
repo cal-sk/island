@@ -89,7 +89,7 @@ class ObjectMap():
             for obj in row:
                 # add more objs as necessary
                 if obj == '1': 
-                    objs.append(PlantObject('assets/coin.png', 'assets/coin2.png','assets/coin3.png','assets/coin4.png', x * self.tile_size, y * self.tile_size, True,64, 64))
+                    objs.append(PlantObject('data/assets/coin.png', 'data/assets/coin2.png','data/assets/coin3.png','data/assets/coin4.png', x * self.tile_size, y * self.tile_size, True,64, 64))
                 x += 1
             y += 1
         
