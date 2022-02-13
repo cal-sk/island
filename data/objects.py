@@ -15,6 +15,7 @@ class PlantObject(pygame.sprite.Sprite):
         self.image3 = pygame.transform.scale(self.image3, (64, 64))        
         self.image4 = pygame.image.load(image4)
         self.image4 = pygame.transform.scale(self.image4, (64, 64))
+        self.forageSound = pygame.mixer.Sound("data/assets/forage.flac")
         self.current_image = self.image1
         # set rect equal to given rect size
         self.rect = pygame.Rect(x, y, xsize, ysize)
@@ -46,8 +47,11 @@ class PlantObject(pygame.sprite.Sprite):
     # interact function called by player.py
     def interact(self):
         self.stock -= 1
+        self.collectSound()
         # func gets called by player
-       
+    def collectSound(self):
+        pygame.mixer.Sound.play(self.forageSound)
+        # pygame.mixer.music.stop()
             
 class ObjectMap():
     # init function

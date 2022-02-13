@@ -1,5 +1,7 @@
 from genericpath import getmtime
 import pygame
+from pygame import mixer
+import random
 from pygame.constants import KEYDOWN, KEYUP, K_e
 
 from data.tiles import *
@@ -13,20 +15,43 @@ clock = pygame.time.Clock()
 WIN_SIZE = (640, 640)
 target_fps = 60
 
-pygame.display.set_caption("Evolution")
+# music
+mixer.init()
+
+mixer.music.load("data/assets/beachambience.mp3")
+
+mixer.music.set_volume(0.3)
+
+mixer.music.play(100)
+
+# bird sound effect
+timer = 0
+birdTime = random.randint(1000, 50000)
+bird = mixer.Sound("data/assets/bird_song_1.flac")
+
+
+
+pygame.display.set_caption("barcc")
 screen = pygame.display.set_mode(WIN_SIZE, 0, 32)
 player = Player()
 
 map = Tilemap('data/assets/map.csv')
 objMap = ObjectMap('data/assets/objMap.csv')
 running = True
-gameFont = pygame.font.SysFont("Andale Mono", 20)
+gameFont = pygame.font.SysFont("Andale Mono", 30)
 
 # change map and sprites to make an island with animations
 
 while running:
     # delta time
     dt = clock.tick(60) * .001 * target_fps
+
+    # bird sound effect timer
+    timer += 1
+    if timer == birdTime:
+        mixer.Sound.play(bird)
+        birdTime = random.randint(1000, 50000)
+        time = 0
 
     # get input for interaction; maybe change and put in check_input.py
     for event in pygame.event.get():
