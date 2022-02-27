@@ -80,3 +80,7 @@ while running:
     screen.blit(textSurf, (20, 20))
     # update the display
     pygame.display.update()
+
+    # add build mechanic with f as build and g as destroy
+    # use tilemap to create build 
+    # build map in separate map like the object map
